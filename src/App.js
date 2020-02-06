@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import AuthorContainer from './Containers/AuthorContainer'
+import ShowContainer from './Containers/ShowContainer'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+let API = "http://localhost:3000/authors"
+
+class App extends React.Component {
+
+
+  state = {
+    authors: [],
+    selectedAuthor: 0
+  }
+
+  componentDidMount() {
+    fetch(API).then(resp => resp.json())
+    .then(result => this.setState({
+      authors: result
+    }))
+  }
+
+  // selectAuthor = () => {
+
+  // }
+
+  render() {
+    // console.log(this.state.authors)
+    return (
+      <div>
+        {/* <h1>Welcome to Newsy</h1> */}
+        {/* <AuthorContainer authors={this.state.authors}/> */}
+        <ShowContainer author={this.state.authors[96]}/>
+      </div>
+    );
+  }
 }
 
 export default App;
