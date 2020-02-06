@@ -5,24 +5,28 @@ import ShowHeader from './ShowHeader'
 
 class ShowContainer extends React.Component {
 
+    renderArticles = () => {
+        // let displayedArticles = this.props.author.articles 
+        //     console.log(displayedArticles)
+       let displayedArticles = this.props.author.articles.map(article => 
+            <ArticleCard 
+                key={article.id} 
+                {...article} />) 
+
+        return( 
+            <div>
+                <ShowHeader {...this.props.author} updateAuthor={this.props.updateAuthor} />
+                { displayedArticles }
+            </div >
+        )
+    }
 
     render() {
-        let displayedArticles
-        
-        if (this.props.author) {
-            displayedArticles = this.props.author.articles 
-            console.log(displayedArticles)
-            displayedArticles = displayedArticles.map(article => <ArticleCard key={article.id} {...article} />) 
-        } else {displayedArticles = "loading"}
 
         return (
-
             <div>
-                <ShowHeader {...this.props.author} />
-                {displayedArticles}
+                {this.props.author ? this.renderArticles() : <div>Loading...</div> }
             </div>
-
-
         )
     }
 

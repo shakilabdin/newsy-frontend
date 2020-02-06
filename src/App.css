@@ -6,3 +6,8 @@
 .show-header span {
   font-size: 4em;
 }
+
+img.headshot {
+  width: 150px;
+  height: 150px;
+}
