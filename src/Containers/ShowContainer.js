@@ -5,6 +5,14 @@ import ShowHeader from './ShowHeader'
 
 class ShowContainer extends React.Component {
 
+    // componentDidMount() {
+    //     fetch(`localhost:3000/authors/${parseInt(this.props.routerProps.match.params.id)}`)
+    //     .then(resp => resp.json())
+    //     .then(data => {
+    //         console.log(data)
+    //     })
+    // }
+
     renderArticles = () => {
         // let displayedArticles = this.props.author.articles 
         //     console.log(displayedArticles)

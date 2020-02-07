@@ -1,7 +1,10 @@
 import React from 'react';
 import './App.css';
+import {Route, Switch, Link} from 'react-router-dom'
 import AuthorContainer from './Containers/AuthorContainer'
 import ShowContainer from './Containers/ShowContainer'
+import NavBar from './Components/NavBar'
+import Welcome from './Components/Welcome'
 
 let API = "http://localhost:3000/authors"
 
@@ -38,9 +41,15 @@ class App extends React.Component {
     // console.log(this.state.authors)
     return (
       <div>
-        {/* <h1>Welcome to Newsy</h1> */}
-        <AuthorContainer authors={this.state.authors}/>
-        {/* <ShowContainer author={this.state.authors[96]} updateAuthor={this.updateAuthor} /> */}
+        <NavBar />
+        <Switch> 
+          <Route path="/authors/:id" render={(routerProps) => <ShowContainer routerProps={routerProps} updateAuthor={this.updateAuthor} />} />
+          <Route path="/authors" render={() => <AuthorContainer authors={this.state.authors} />} />
+          <Route path="/login" render={() => <AuthorContainer authors={this.state.authors} />} />
+          <Route path="/signup" render={() => <AuthorContainer authors={this.state.authors} />} />
+          <Route path="/" component={Welcome} />
+          
+        </Switch>
       </div>
     );
   }

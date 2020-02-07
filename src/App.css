@@ -11,3 +11,18 @@ img.headshot {
   width: 150px;
   height: 150px;
 }
+
+.nav-bar-logo {
+  width: 100px
+}
+
+.nav-bar-title {
+  font-size: 3em;
+
+  background-color: #000;
+  color: #FFFFFF;
+}
+
+.nav-bar {
+  vertical-align: top;
+}
