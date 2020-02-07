@@ -5,25 +5,60 @@ import ShowHeader from './ShowHeader'
 
 class ShowContainer extends React.Component {
 
-    // componentDidMount() {
-    //     fetch(`localhost:3000/authors/${parseInt(this.props.routerProps.match.params.id)}`)
-    //     .then(resp => resp.json())
-    //     .then(data => {
-    //         console.log(data)
-    //     })
-    // }
+    state = {
+        author: {}
+    }
+
+    componentDidMount() {
+        fetch(`http://localhost:3000/authors/${parseInt(this.props.routerProps.match.params.id)}`)
+        // fetch(`http://localhost:3000/authors/3`)
+        .then(resp => resp.json())
+        .then(author => {
+            this.setState({
+                author: author
+            })
+        })
+    }
+
+
+    updateAuthor = (editedAuthor) => {
+        
+        // optimistic render
+        this.setState({
+            author: editedAuthor
+        })
+
+        const configObj = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "application/json"
+            },
+            body: JSON.stringify(editedAuthor)
+        }
+
+        fetch(`http://localhost:3000/authors/${parseInt(this.props.routerProps.match.params.id)}`, configObj)
+        .then(resp => resp.json())
+        .then(author => {
+            console.log("response:", author)
+        })
+
+
+
+
+    }
 
     renderArticles = () => {
         // let displayedArticles = this.props.author.articles 
         //     console.log(displayedArticles)
-       let displayedArticles = this.props.author.articles.map(article => 
+       let displayedArticles = this.state.author.articles.map(article => 
             <ArticleCard 
                 key={article.id} 
                 {...article} />) 
 
         return( 
             <div>
-                <ShowHeader {...this.props.author} updateAuthor={this.props.updateAuthor} />
+                <ShowHeader {...this.state.author} updateAuthor={this.updateAuthor} />
                 { displayedArticles }
             </div >
         )
@@ -33,7 +68,7 @@ class ShowContainer extends React.Component {
 
         return (
             <div>
-                {this.props.author ? this.renderArticles() : <div>Loading...</div> }
+                {this.state.author.articles ? this.renderArticles() : <div>Loading...</div> }
             </div>
         )
     }

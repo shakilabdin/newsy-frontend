@@ -3,11 +3,22 @@ import { Link } from 'react-router-dom'
 import AuthorCard from '../Components/AuthorCard'
 import SearchBar from '../Components/SearchBar'
 
+let API = "http://localhost:3000/authors"
+
 class AuthorContainer extends React.Component {
 
     state = {
-        search: ""
+        search: "",
+        authors: []
     }
+
+    componentDidMount() {
+        fetch(API).then(resp => resp.json())
+            .then(result => this.setState({
+                authors: result
+            }))
+    }
+
 
 
     searchChangeHandler = (newSearch) => {
@@ -18,7 +29,7 @@ class AuthorContainer extends React.Component {
 
     render() {
 
-        let displayedAuthors = this.props.authors.filter(author => author.name.toLowerCase().includes(this.state.search.toLowerCase()))
+        let displayedAuthors = this.state.authors.filter(author => author.name.toLowerCase().includes(this.state.search.toLowerCase()))
         displayedAuthors = displayedAuthors.map(author => 
             <Link to={`/authors/${author.id}`}><AuthorCard key={author.id} {...author} /></Link>)
 
