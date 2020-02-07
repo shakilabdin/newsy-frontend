@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Route, Switch, Link} from 'react-router-dom'
+import AuthorContainer from './Containers/AuthorContainer'
+import ShowContainer from './Containers/ShowContainer'
+import NavBar from './Components/NavBar'
+import Welcome from './Components/Welcome'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  render() {
+    // console.log(this.state.authors)
+    return (
+      <div>
+        <NavBar />
+        <Switch> 
+          <Route path="/authors/:id" render={(routerProps) => <ShowContainer routerProps={routerProps} updateAuthor={this.updateAuthor} />} />
+          <Route path="/authors" render={() => <AuthorContainer />} />
+          <Route path="/login" render={() => <AuthorContainer />} />
+          <Route path="/signup" render={() => <AuthorContainer />} />
+          <Route path="/" component={Welcome} />
+          
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
