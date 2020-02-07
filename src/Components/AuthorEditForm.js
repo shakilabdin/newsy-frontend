@@ -28,15 +28,6 @@ class AuthorEditForm extends React.Component {
     // optimistic render
     this.props.updateAuthor(bodyObj)
 
-    const configObj = {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "Accepts": "application/json"
-      },
-      body: JSON.stringify(bodyObj)
-    }
-    // fetch
   }
 
   

@@ -20,31 +20,22 @@ class ShowContainer extends React.Component {
         })
     }
 
-
-    updateAuthor = (editedAuthor) => {
-        
+    updateAuthor = (editedAuthor) => {        
         // optimistic render
         this.setState({
             author: editedAuthor
         })
 
         const configObj = {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json"
-            },
-            body: JSON.stringify(editedAuthor)
-        }
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify(editedAuthor)
+        };
 
         fetch(`http://localhost:3000/authors/${parseInt(this.props.routerProps.match.params.id)}`, configObj)
-        .then(resp => resp.json())
-        .then(author => {
-            console.log("response:", author)
-        })
-
-
-
 
     }
 
@@ -65,7 +56,6 @@ class ShowContainer extends React.Component {
     }
 
     render() {
-
         return (
             <div>
                 {this.state.author.articles ? this.renderArticles() : <div>Loading...</div> }
