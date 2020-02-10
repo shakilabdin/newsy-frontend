@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Route, Switch, Link} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import AuthorContainer from './Containers/AuthorContainer'
 import ShowContainer from './Containers/ShowContainer'
 import NavBar from './Components/NavBar'

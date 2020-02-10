@@ -36,7 +36,6 @@ class AuthorContainer extends React.Component {
         displayedAuthors = displayedAuthors.map(author => 
             <Link key={author.id} to={`/authors/${author.id}`}><AuthorCard key={author.id} {...author} /></Link>)
 
-        console.log(this.state.search)
         return (
             <div>
                 <h1>Author Container</h1>

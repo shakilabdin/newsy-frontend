@@ -6,7 +6,7 @@ class AuthorCard extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="ui card">
                 <img className="headshot" src={this.props.image ? this.props.image : missingImg} alt={"picture of " + this.props.name}/>
                 <span>{this.props.name}: </span>
                 <span>{this.props.article_count} article{this.props.article_count > 1 && "s"} written</span>
