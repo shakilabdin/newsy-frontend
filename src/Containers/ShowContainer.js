@@ -11,7 +11,6 @@ class ShowContainer extends React.Component {
 
     componentDidMount() {
         fetch(`http://localhost:3000/authors/${parseInt(this.props.routerProps.match.params.id)}`)
-        // fetch(`http://localhost:3000/authors/3`)
         .then(resp => resp.json())
         .then(author => {
             this.setState({
