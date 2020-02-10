@@ -28,10 +28,13 @@ class AuthorContainer extends React.Component {
     }
 
     render() {
-
+        // map to implement search filter
         let displayedAuthors = this.state.authors.filter(author => author.name.toLowerCase().includes(this.state.search.toLowerCase()))
+        // resort alphabetically
+        displayedAuthors.sort((a, b) => a.name.localeCompare(b.name))
+        // map to AuthorCard componenets
         displayedAuthors = displayedAuthors.map(author => 
-            <Link to={`/authors/${author.id}`}><AuthorCard key={author.id} {...author} /></Link>)
+            <Link key={author.id} to={`/authors/${author.id}`}><AuthorCard key={author.id} {...author} /></Link>)
 
         console.log(this.state.search)
         return (
