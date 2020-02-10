@@ -1,14 +1,33 @@
 import React from "react";
-import { Menu, Input } from "semantic-ui-react";
+import { Menu, Dropdown, Form, Input } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 class NavBar extends React.Component {
-  state = { activeItem: "home" };
+  state = { 
+    activeItem: "home",
+  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
+  submitHandler = (e, data) => {
+    // debugger
+    let authorId
+    if (e && e.target.innerText) {
+      authorId = data.options.find(o => o.text === e.target.innerText).value
+    }
+      console.log(authorId)
+  }
+
   render() {
     const { activeItem } = this.state;
+    let authorArr = this.props.authors.map(author => ({
+      key: author.id,
+      text: author.name,
+      value: author.id
+    }))
+    let authorOptions = ["", ...authorArr]
+  
+    // console.log(authorOptions)
 
     return (
       // <div className="nav-bar">
@@ -19,9 +38,11 @@ class NavBar extends React.Component {
       //   <Link to="/signup"><span className="nav-bar-link">Signup </span></Link>
       // </div>
 
+
+
       <Menu inverted color="green" size="massive">
         <Link to="/">
-          <img className="nav-bar-logo" src="/newsy_logo.png" />
+          <img className="nav-bar-logo" src="/newsy_logo.png" alt="logo"/>
         </Link>
         <div className="left menu">
           <Menu.Item
@@ -39,14 +60,19 @@ class NavBar extends React.Component {
           </Menu.Item>
         </div>
         <div className="right menu">
+          
           <Menu.Item>
-            <Input
-              className="icon"
-              icon="search"
-              placeholder="Search..."
-              action={{ type: "submit" }}
-            />
+              <Dropdown 
+                onClose={(e, data) => this.submitHandler(e, data)}
+                placeholder="Jump to author..."
+                search 
+                floating
+                labeled 
+                options={authorOptions}
+              />
           </Menu.Item>
+
+
           <Menu.Item
             name="Login"
             active={activeItem === "friends"}
