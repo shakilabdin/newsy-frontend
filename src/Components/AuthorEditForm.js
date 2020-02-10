@@ -13,7 +13,7 @@ class AuthorEditForm extends React.Component {
   submitHandler = (e) => {
     e.preventDefault()
     this.props.toggleEditing()
-    
+
     // PATCH request (coming soon!)
     const bodyObj = {
       id: this.state.id,
@@ -23,7 +23,10 @@ class AuthorEditForm extends React.Component {
       articles: this.state.articles
     }
     
-    console.log("bodyObj:", bodyObj)
+    // handling for leading @ on twitter handle. Turns out Twitter can handle it with or without @
+    // if (bodyObj.twitter.charAt(0) === '@') {
+    //   bodyObj.twitter = bodyObj.twitter.slice(1)
+    // }
 
     // optimistic render
     this.props.updateAuthor(bodyObj)

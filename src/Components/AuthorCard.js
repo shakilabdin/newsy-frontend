@@ -8,15 +8,12 @@ class AuthorCard extends React.Component {
         return (
             <div>
                 <img className="headshot" src={this.props.image ? this.props.image : missingImg} alt={"picture of " + this.props.name}/>
-                <span>{this.props.name}</span>
-                {/* <p>{this.props.articles_count} article{this.props.articles_count > 1 && "s"} written</p> */}
+                <span>{this.props.name}: </span>
+                <span>{this.props.article_count} article{this.props.article_count > 1 && "s"} written</span>
             </div>
 
         )
     }
-
-
-
 }
 
 export default AuthorCard;
