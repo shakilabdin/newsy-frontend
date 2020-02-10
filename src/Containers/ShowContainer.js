@@ -58,9 +58,9 @@ class ShowContainer extends React.Component {
     render() {
         return (
             <div>
-                <div>{this.state.author.articles ? this.renderArticles() : <div>Loading...</div>}</div>
+                {/* <div>{this.state.author.articles ? this.renderArticles() : <div>Loading...</div>}</div> */}
                 {this.state.author.twitter ? <div>
-                    <a className="twitter-timeline" href={`https://twitter.com/${this.state.author.twitter}?ref_src=twsrc%5Etfw`}>Tweets by ABehsudi</a> 
+                    <a className="twitter-timeline" href={`https://twitter.com/${this.state.author.twitter}?ref_src=twsrc%5Etfw`}>Tweets by {this.state.author.name}</a> 
                 </div> : "TWITTER MISSING. ADD IT!!!!"}
             </div>
         )
