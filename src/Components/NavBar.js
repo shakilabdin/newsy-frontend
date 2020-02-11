@@ -44,7 +44,7 @@ class NavBar extends React.Component {
 
 
 
-      <Menu inverted color="green" size="massive">
+      <Menu inverted color="grey" size="massive">
         <Link to="/">
           <img className="nav-bar-logo" src="/newsy_logo.png" alt="logo"/>
         </Link>

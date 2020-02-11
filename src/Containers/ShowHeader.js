@@ -10,7 +10,7 @@ class ShowHeader extends React.Component {
     render() {
         return (
           <Grid>
-            <Grid.Row color="olive">
+            <Grid.Row color="teal">
               <Grid.Column width={3}>
                 <Image src={this.props.image} circular bordered />
               </Grid.Column>

@@ -52,7 +52,7 @@ class AuthorEditForm extends React.Component {
               this.setState({ showModal: true });
             }}
             basic
-            color="green"
+            color="grey"
             floated="right"
           >
             Edit Author
@@ -99,7 +99,7 @@ class AuthorEditForm extends React.Component {
             onClick={e => {
               this.submitHandler(e);
             }}
-            color="green"
+            color="teal"
             inverted
           >
             <Icon name="checkmark" /> Submit

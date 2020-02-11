@@ -39,7 +39,9 @@ class AuthorContainer extends React.Component {
         // console.log(this.state.search)
         return (
             <div>
-                <SearchBar search={this.state.search} searchChangeHandler={this.searchChangeHandler}/>
+                <div>
+                    <SearchBar search={this.state.search} searchChangeHandler={this.searchChangeHandler}/>
+                    </div>
                 <hr/>
                 <br/>
                 <Grid container centered columns={3}>
