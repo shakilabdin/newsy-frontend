@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid, Item } from 'semantic-ui-react'
 import ArticleCard from '../Components/ArticleCard'
 import ShowHeader from './ShowHeader'
 
@@ -42,14 +43,15 @@ class ShowContainer extends React.Component {
     renderArticles = () => {
         // let displayedArticles = this.props.author.articles 
         //     console.log(displayedArticles)
-       let displayedArticles = this.state.author.articles.map(article => 
-            <ArticleCard 
-                key={article.id} 
-                {...article} />) 
+       let displayedArticles = this.state.author.articles.map(article => (
+         <Item.Group>
+           <ArticleCard key={article.id} {...article} />
+           <div className="ui divider"></div>
+         </Item.Group>
+       ));
 
         return( 
             <div>
-                <ShowHeader {...this.state.author} updateAuthor={this.updateAuthor} />
                 { displayedArticles }
             </div >
         )
@@ -57,13 +59,43 @@ class ShowContainer extends React.Component {
 
     render() {
         return (
+          <div>
             <div>
-                <div>{this.state.author.articles ? this.renderArticles() : <div>Loading...</div>}</div>
-                {this.state.author.twitter ? <div>
-                    <a className="twitter-timeline" href={`https://twitter.com/${this.state.author.twitter}?ref_src=twsrc%5Etfw`}>Tweets by {this.state.author.name}</a> 
-                </div> : "TWITTER MISSING. ADD IT!!!!"}
+              <ShowHeader
+                {...this.state.author}
+                updateAuthor={this.updateAuthor}
+              />
             </div>
-        )
+
+            <Grid divided columns={2}>
+              <Grid.Row>
+                <Grid.Column>
+                  {/* <Item.Group> */}
+                  {this.state.author.articles ? (
+                    this.renderArticles()
+                  ) : (
+                    <div>Loading...</div>
+                  )}
+                  {/* </Item.Group> */}
+                </Grid.Column>
+                <Grid.Column>
+                  {this.state.author.twitter ? (
+                    <div>
+                      <a
+                        className="twitter-timeline"
+                        href={`https://twitter.com/${this.state.author.twitter}?ref_src=twsrc%5Etfw`}
+                      >
+                        Tweets by {this.state.author.name}
+                      </a>
+                    </div>
+                  ) : (
+                    "TWITTER MISSING. ADD IT!!!!"
+                  )}
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </div>
+        );
     }
 
 }
