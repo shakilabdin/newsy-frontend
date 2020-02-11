@@ -1,33 +1,37 @@
 import React from "react";
 import { Menu, Dropdown, Form, Input } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 class NavBar extends React.Component {
   state = { 
     activeItem: "home",
+    value: ""
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   submitHandler = (e, data) => {
-    // debugger
     let authorId
     if (e && e.target.innerText) {
       authorId = data.options.find(o => o.text === e.target.innerText).value
+      this.props.routerProps.history.push(`/authors/${authorId}`)
+      this.setState({
+        value: ""
+      })
     }
-      console.log(authorId)
   }
 
   render() {
     const { activeItem } = this.state;
+
     let authorArr = this.props.authors.map(author => ({
       key: author.id,
       text: author.name,
       value: author.id
     }))
+
     let authorOptions = ["", ...authorArr]
-  
-    // console.log(authorOptions)
+
 
     return (
       // <div className="nav-bar">
@@ -68,6 +72,7 @@ class NavBar extends React.Component {
                 search 
                 floating
                 labeled 
+                value={this.state.value}
                 options={authorOptions}
               />
           </Menu.Item>
@@ -89,4 +94,4 @@ class NavBar extends React.Component {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);

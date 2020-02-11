@@ -17,7 +17,8 @@ class ShowHeader extends React.Component {
     render() {
         return (
             <div className="show-header">
-                <AuthorCard {...this.props}/>
+                {/* <AuthorCard {...this.props}/> */}
+                <h2>{this.props.name}</h2>
                 <button onClick={this.toggleEditing} >Edit Author</button>
                 {this.state.editing && <AuthorEditForm toggleEditing={this.toggleEditing} {...this.props} updateAuthor={this.props.updateAuthor} />}
             </div>

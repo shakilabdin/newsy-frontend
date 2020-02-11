@@ -26,7 +26,7 @@ class App extends React.Component {
     // console.log(this.state.authors)
     return (
       <div>
-        <NavBar authors={this.state.authors}/>
+        <Route path="/" render={(routerProps) => <NavBar routerProps={routerProps} authors={this.state.authors}/> }  />
         <Switch> 
           <Route path="/authors/:id" render={(routerProps) => <ShowContainer routerProps={routerProps} updateAuthor={this.updateAuthor} />} />
           <Route path="/authors" render={() => <AuthorContainer authors={this.state.authors} />} />
