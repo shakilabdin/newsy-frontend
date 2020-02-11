@@ -5,6 +5,8 @@ import AuthorEditForm from '../Components/AuthorEditForm'
 
 class ShowHeader extends React.Component {
 
+
+
     render() {
         return (
           <Grid>
@@ -24,10 +26,9 @@ class ShowHeader extends React.Component {
                 </a>
               </Grid.Column>
               <Grid.Column width={7}>
-                  <AuthorEditForm
-                    {...this.props}
-                    updateAuthor={this.props.updateAuthor}
-                  />
+                <AuthorEditForm
+                  {...this.props}
+                />
               </Grid.Column>
             </Grid.Row>
           </Grid>
