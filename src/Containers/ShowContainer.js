@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Item } from 'semantic-ui-react'
+import { Divider, Grid, Item } from 'semantic-ui-react'
 import ArticleCard from '../Components/ArticleCard'
 import ShowHeader from './ShowHeader'
 
@@ -66,10 +66,11 @@ class ShowContainer extends React.Component {
                 updateAuthor={this.updateAuthor}
               />
             </div>
+            <Divider hidden />
 
-            <Grid divided columns={2}>
+            <Grid divided>
               <Grid.Row>
-                <Grid.Column>
+                <Grid.Column width={10}>
                   {/* <Item.Group> */}
                   {this.state.author.articles ? (
                     this.renderArticles()
@@ -78,7 +79,7 @@ class ShowContainer extends React.Component {
                   )}
                   {/* </Item.Group> */}
                 </Grid.Column>
-                <Grid.Column>
+                <Grid.Column width={6}>
                   {this.state.author.twitter ? (
                     <div>
                       <a
