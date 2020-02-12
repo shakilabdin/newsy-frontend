@@ -6,8 +6,12 @@ import LoggedInContainer from "./Containers/LoggedInContainer";
 
 
 class App extends React.Component {
-  
+  state = {
+    currentUser: null
+  };
+
   setUser = response => {
+    debugger;
     this.setState(
       {
         currentUser: response.user
@@ -19,17 +23,42 @@ class App extends React.Component {
     );
   };
 
+  checkAutoLogin = token => {
+    fetch("http://localhost:3000/auto_login", {
+      headers: {
+        Authorization: token
+      }
+    })
+      .then(res => res.json())
+      .then(response => {
+        if (response.errors) {
+          alert(response.errors);
+        } else {
+          this.setState({
+            currentUser: response
+          });
+        }
+      });
+  };
+
   render() {
-    console.log("App Render")
+    console.log("App Render");
     return (
       <div>
-        <Route path="/authors" render={() => <LoggedInContainer />} />
         <Route
-          exact path="/"
+          path="/authors"
+          render={routerProps => (
+            <LoggedInContainer
+              routerProps={routerProps}
+              checkAutoLogin={this.checkAutoLogin}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/"
           render={() => <HomeContainer setUser={this.setUser} />}
         />
-
-
       </div>
     );
   }

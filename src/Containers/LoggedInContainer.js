@@ -9,8 +9,7 @@ let API = "http://localhost:3000/authors"
 
 class LoggedInContainer extends React.Component {
   state = {
-    authors: [],
-    currentUser: null
+    authors: []
   };
 
   // On mount fetch all authors
@@ -19,31 +18,15 @@ class LoggedInContainer extends React.Component {
      const token = localStorage.token;
 
      this.fetchAuthors()
-    //  if (token) {
-    //    //get user info
-    //     this.checkAutoLogin(token)
-    //  } else {
-    //    this.props.history.push('/')
-    //  }
+     if (token) {
+       //get user info
+        this.props.checkAutoLogin(token)
+     } else {
+       this.props.routerProps.history.push('/')
+     }
   }
 
-  checkAutoLogin = (token) => {
-    fetch("http://localhost:3001/api/v1/auto_login", {
-      headers: {
-        Authorization: token
-      }
-    })
-      .then(res => res.json())
-      .then(response => {
-        if (response.errors) {
-          alert(response.errors);
-        } else {
-          this.setState({
-            currentUser: response
-          });
-        }
-      });
-  }
+  
 
   fetchAuthors = () => {
     fetch(API)
@@ -58,20 +41,19 @@ class LoggedInContainer extends React.Component {
 
   
 
-  logout = () => {
-    this.setState(
-      {
-        currentUser: null
-      },
-      () => {
-        localStorage.removeItem("token");
-        this.props.history.push("/login");
-      }
-    );
-  };
+  // logout = () => {
+  //   this.setState(
+  //     {
+  //       currentUser: null
+  //     },
+  //     () => {
+  //       localStorage.removeItem("token");
+  //       this.props.routerProps.history.push("/login");
+  //     }
+  //   );
+  // };
 
   render() {
-    console.log("In render. currentUser", this.state.currentUser)
     return (
       <div>
         <Route
