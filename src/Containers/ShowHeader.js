@@ -1,6 +1,5 @@
 import React from 'react'
 import { Grid, Image, Button } from 'semantic-ui-react'
-import AuthorCard from '../Components/AuthorCard'
 import AuthorEditForm from '../Components/AuthorEditForm'
 
 class ShowHeader extends React.Component {
@@ -18,7 +17,15 @@ class ShowHeader extends React.Component {
                 <h1>{this.props.name}</h1>
                 <p style={{ margin: "0px" }}>
                   {this.props.article_count} Article
-                  {this.props.article_count > 1 && "s"} Written
+                  {this.props.article_count !== 1 && "s"} Written
+                </p>
+                <p style={{ margin: "0px" }}>
+                  {this.props.article_count} Article
+                  {this.props.article_count !== 1 && "s"} Written
+                </p>
+                <p style={{ margin: "0px" }}>
+                  {this.props.total_ratings} Rating
+                  {this.props.total_ratings !== 1 && "s"}
                 </p>
                 <a href={`https://twitter.com/${this.props.twitter}`}>
                   <i className="twitter icon"></i>
