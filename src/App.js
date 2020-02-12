@@ -15,6 +15,7 @@ class App extends React.Component {
     authors: []
   }
 
+  // On mount fetch all authors 
   componentDidMount() {
     fetch(API).then(resp => resp.json())
         .then(result => this.setState({
@@ -23,7 +24,6 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log(this.state.authors)
     return (
       <div>
         <Route path="/" render={(routerProps) => <NavBar routerProps={routerProps} authors={this.state.authors}/> }  />
