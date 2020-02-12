@@ -1,15 +1,15 @@
 import React from "react";
-import { Menu, Dropdown, Form, Input } from "semantic-ui-react";
+import { Menu, Dropdown} from "semantic-ui-react";
 import { Link, withRouter } from "react-router-dom";
 
 class NavBar extends React.Component {
   state = { 
-    activeItem: "home",
     value: ""
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
+  // Nav Bar Jump to page submit handler
   submitHandler = (e, data) => {
     let authorId
     if (e && e.target.innerText) {
@@ -22,8 +22,6 @@ class NavBar extends React.Component {
   }
 
   render() {
-    const { activeItem } = this.state;
-
     let authorArr = this.props.authors.map(author => ({
       key: author.id,
       text: author.name,
@@ -34,15 +32,6 @@ class NavBar extends React.Component {
 
 
     return (
-      // <div className="nav-bar">
-      //   <Link to="/"><img className="nav-bar-logo" src="/newsy_logo.png" /></Link>
-      //   <Link to="/"><span className="nav-bar-title">Newsy </span> </Link>
-      //   <Link to="/authors"><span className="nav-bar-link">Author Index </span></Link>
-      //   <Link to="/login"><span className="nav-bar-link">Login </span></Link>
-      //   <Link to="/signup"><span className="nav-bar-link">Signup </span></Link>
-      // </div>
-
-
 
       <Menu inverted color="grey" size="massive">
         <Link to="/">
@@ -50,14 +39,12 @@ class NavBar extends React.Component {
         </Link>
         <div className="left menu">
           <Menu.Item
-            active={activeItem === "home"}
             onClick={this.handleItemClick}
           >
             <Link to="/"><span>Newsy</span></Link>
           </Menu.Item>
           <Menu.Item
             name="Authors"
-            active={activeItem === "messages"}
             onClick={this.handleItemClick}
           >
             <Link to="/authors"><span>Authors</span></Link>
@@ -80,12 +67,10 @@ class NavBar extends React.Component {
 
           <Menu.Item
             name="Login"
-            active={activeItem === "friends"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             name="Sign Up"
-            active={activeItem === "friends"}
             onClick={this.handleItemClick}
           />
         </div>

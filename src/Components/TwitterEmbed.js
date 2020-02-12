@@ -1,6 +1,4 @@
 import React from 'react'
-import { Modal, Button, Icon, Header} from 'semantic-ui-react'
-import AuthorEditForm from './AuthorEditForm'
 
 class TwitterEmbed extends React.Component {
   
@@ -11,7 +9,7 @@ class TwitterEmbed extends React.Component {
           <a
             className="twitter-timeline"
             href={`https://twitter.com/${this.props.twitter}?ref_src=twsrc%5Etfw`}
-          ></a>
+          >Loading</a>
         ) : (
           "THERE IS NO TWITTER!"
         )}
