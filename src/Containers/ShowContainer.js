@@ -23,6 +23,25 @@ class ShowContainer extends React.Component {
       });
   }
 
+  addRating = (bodyObj) => {
+    console.log("Add Rating!", bodyObj)
+
+    const configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify(bodyObj)
+    }
+
+    fetch(`http://localhost:3000/ratings`, configObj)
+    .then(resp => resp.json())
+    .then(rating => {
+      console.log("rating", rating)
+    })
+  }
+
   editFormChangeHandler = e => {
     console.log(e);
     this.setState({
@@ -78,6 +97,7 @@ class ShowContainer extends React.Component {
             {...this.state}
             editFormChangeHandler={this.editFormChangeHandler}
             updateAuthor={this.updateAuthor}
+            addRating={this.addRating}
           />
         </div>
         <Divider hidden />

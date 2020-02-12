@@ -36,3 +36,7 @@
 .timeline-Header {
   display: none;
 }
+
+.slider {
+  width: 100%
+}
