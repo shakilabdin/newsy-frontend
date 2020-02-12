@@ -26,6 +26,11 @@ class ShowContainer extends React.Component {
   addRating = (bodyObj) => {
     console.log("Add Rating!", bodyObj)
 
+    // bodyObj = {
+    //   ...bodyObj,
+    //   user_id: this.props.currentUser
+    // }
+
     const configObj = {
       method: "POST",
       headers: {
