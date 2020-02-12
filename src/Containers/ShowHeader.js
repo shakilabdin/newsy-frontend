@@ -1,11 +1,17 @@
-import React from "react";
-import { Grid, Image } from "semantic-ui-react";
-import AuthorEditForm from "../Components/AuthorEditForm";
+import React from 'react'
+import { Grid, Image, Button } from 'semantic-ui-react'
+import AuthorCard from '../Components/AuthorCard'
+import AuthorEditForm from '../Components/AuthorEditForm'
+import AddRatingModal from '../Components/AddRatingModal'
 import Plot from "react-plotly.js";
+
+const userId = 1
+
 
 class ShowHeader extends React.Component {
     render() {
         return (
+
             <Grid>
                 <Grid.Row color="teal">
                     <Grid.Column width={3}>
@@ -69,6 +75,11 @@ class ShowHeader extends React.Component {
                             }}
                         />
                         <AuthorEditForm {...this.props} />
+                        <AddRatingModal 
+                          {...this.props} 
+                          addRating={this.props.addRating}
+                          authorId={this.props.id} 
+                          userId={userId} />
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
