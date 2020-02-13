@@ -77,7 +77,7 @@ class ShowHeader extends React.Component {
             </p>
             <a href={`https://twitter.com/${this.props.twitter}`}>
               <i className="twitter icon"></i>
-              <span>@{this.props.twitter}</span>
+              <span>@{this.props.twitter ? this.props.twitter : "Add Twitter Handle"}</span>
             </a>
             <br />
             <br />

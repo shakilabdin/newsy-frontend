@@ -7,9 +7,6 @@ import TwitterEmbed from '../Components/TwitterEmbed'
 
 class ShowContainer extends React.Component {
   state = {
-    // editMode: false,
-    // integrity: 0,
-    // likeability: 0
   };
 
   componentDidMount() {
@@ -18,7 +15,6 @@ class ShowContainer extends React.Component {
         this.props.routerProps.match.params.id
       )}`
     )
-      // fetch(`http://localhost:3000/authors/3`)
       .then(resp => resp.json())
       .then(author => {
         this.setState(
@@ -141,8 +137,6 @@ class ShowContainer extends React.Component {
   };
 
   renderArticles = () => {
-    // let displayedArticles = this.props.author.articles
-    //     console.log(displayedArticles)
     let displayedArticles = this.state.articles.map(article => (
       <Item.Group>
         <ArticleCard key={article.id} {...article} />
@@ -152,28 +146,6 @@ class ShowContainer extends React.Component {
 
     return <div>{displayedArticles}</div>;
   };
-
-  // checkForMyRating = () => {
-  //   console.log("hitting")
-  //   const myRating = this.state.ratings.find(
-  //     rating => rating.user_id === this.props.currentUser.id
-  //   );
-
-  //   if (myRating) {
-  //     debugger
-  //     this.setState({
-  //       editMode: true,
-  //       integrity: myRating.integrity,
-  //       likeability: myRating.likeability
-  //     });
-  //   }
-  // };
-
-  // ratingChangeHandler = target => {
-  //   this.setState({
-  //     [target.name]: target.value
-  //   });
-  // };
 
   render() {
     return (

@@ -7,6 +7,11 @@
   font-size: 4em;
 }
 
+.home-logo {
+  width: 900px;
+  height: 300px;
+}
+
 .headshot {
   width: 290px;
   height: 250px;

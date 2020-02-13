@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Button, Icon, Header, Form } from 'semantic-ui-react'
+import { Modal, Button, Icon, Header} from 'semantic-ui-react'
 
 class AddRatingModal extends React.Component {
   

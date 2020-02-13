@@ -12,15 +12,6 @@ class AuthorContainer extends React.Component {
         search: ""
     }
 
-    // componentDidMount() {
-    //     fetch(API).then(resp => resp.json())
-    //         .then(result => this.setState({
-    //             authors: result
-    //         }))
-    // }
-
-
-
     searchChangeHandler = (newSearch) => {
         this.setState({
             search: newSearch
@@ -36,7 +27,6 @@ class AuthorContainer extends React.Component {
         displayedAuthors = displayedAuthors.map(author => 
             <Link key={author.id} to={`/authors/${author.id}`}><Grid.Column><AuthorCard key={author.id} {...author} /></Grid.Column></Link>)
 
-        // console.log(this.state.search)
         return (
             <div>
                 <div>

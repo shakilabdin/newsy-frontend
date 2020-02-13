@@ -2,15 +2,8 @@ import React from 'react'
 import Signup from '../Components/Signup'
 import Login from '../Components/Login'
 import {
-  Button,
-  Form,
   Grid,
-  Header,
-  Image,
-  Message,
-  Segment
 } from "semantic-ui-react";
-import { unstable_renderSubtreeIntoContainer } from 'react-dom';
 
 class HomeContainer extends React.Component {
   render() {
@@ -22,7 +15,10 @@ class HomeContainer extends React.Component {
       >
         <Grid.Column>
           <Grid.Row>
-            <img src="newsy_logo.png" />
+            <img className="home-logo" src="newsy-logo.png" alt="newsy logo"/>
+            <br/>
+            <br/>
+            <br/>
           </Grid.Row>
           <Grid.Row>
             <Grid textAlign="center" verticalAlign="top">
