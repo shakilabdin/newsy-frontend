@@ -18,14 +18,14 @@ class AuthorCard extends React.Component {
               <Card.Content>
                 <Card.Header>{this.props.name}</Card.Header>
                 <Card.Description>
-                  <Icon name="newspaper icon" />
+                  <Icon name='newspaper' />
                   {this.props.article_count} Article
                   {this.props.article_count !== 1 && "s"} Written
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
                 <span>
-                  <Icon name="star icon" />
+                  <Icon color='yellow' name='star' />
                   {this.props.total_ratings}
                 </span>
               </Card.Content>

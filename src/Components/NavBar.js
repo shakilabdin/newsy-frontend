@@ -7,7 +7,6 @@ class NavBar extends React.Component {
     value: ""
   }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   // Nav Bar Jump to page submit handler
   submitHandler = (e, data) => {
@@ -41,9 +40,7 @@ class NavBar extends React.Component {
           <img className="nav-bar-logo" src="/newsy_logo.png" alt="logo"/>
         </Link>
         <div className="left menu">
-          <Menu.Item
-            onClick={this.handleItemClick}
-          >
+          <Menu.Item>
             <Link to="/authors"><span>Newsy</span></Link>
           </Menu.Item>
         </div>

@@ -35,18 +35,18 @@ class RatingPlot extends React.Component {
             xaxis: {
               title: "Likeability",
               range: [-5, 5],
-              color: "grey"
+              color: "black"
             },
             yaxis: {
               title: "Integrity",
               range: [-5, 5],
-              color: "grey"
+              color: "black"
             },
             plot_bgcolor: "#00b5ad",
             paper_bgcolor: "#00b5ad",
             margin: {
               l: 50,
-              t: 10,
+              t: 20,
               b: 50,
               r: 50
             }
