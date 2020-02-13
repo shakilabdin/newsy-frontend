@@ -93,7 +93,7 @@ class AuthorEditForm extends React.Component {
             color="red"
             inverted
           >
-            <Icon name="remove" /> Cancel
+            <Icon name="user cancel" /> Cancel
           </Button>
           <Button
             onClick={e => {

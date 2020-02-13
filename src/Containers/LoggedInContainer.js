@@ -69,7 +69,7 @@ class LoggedInContainer extends React.Component {
               <ShowContainer
                 routerProps={routerProps}
                 updateAuthor={this.updateAuthor}
-                currentUser={this.state.currentUser}
+                currentUser={this.props.currentUser}
               />
             )}
           />

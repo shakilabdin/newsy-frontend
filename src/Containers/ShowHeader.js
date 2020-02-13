@@ -1,14 +1,12 @@
 import React from 'react'
-import { Grid, Image, Button } from 'semantic-ui-react'
-import AuthorCard from '../Components/AuthorCard'
+import { Grid, Image } from 'semantic-ui-react'
 import AuthorEditForm from '../Components/AuthorEditForm'
 import AddRatingModal from '../Components/AddRatingModal'
 import RatingPlot from "../Components/RatingPlot";
 
-const userId = 1
-
 
 class ShowHeader extends React.Component {
+  
     render() {
         return (
           <Grid>
@@ -39,8 +37,11 @@ class ShowHeader extends React.Component {
                 <AddRatingModal
                   {...this.props}
                   addRating={this.props.addRating}
+                  editRating={this.props.editRating}
+                  deleteRating={this.props.deleteRating}
+                  currentUser={this.props.currentUser}
                   authorId={this.props.id}
-                  userId={userId}
+                  ratingChangeHandler={this.props.ratingChangeHandler}
                 />
               </Grid.Column>
             </Grid.Row>

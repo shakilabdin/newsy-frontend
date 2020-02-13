@@ -6,7 +6,11 @@ import TwitterEmbed from '../Components/TwitterEmbed'
 
 
 class ShowContainer extends React.Component {
-  state = {};
+  state = {
+    // editMode: false,
+    // integrity: 0,
+    // likeability: 0
+  };
 
   componentDidMount() {
     fetch(
@@ -17,35 +21,90 @@ class ShowContainer extends React.Component {
       // fetch(`http://localhost:3000/authors/3`)
       .then(resp => resp.json())
       .then(author => {
-        this.setState({
-          ...author
-        });
+        this.setState(
+          {
+            ...author
+          },
+          () => this.checkForMyRating
+        );
       });
   }
 
-  addRating = (bodyObj) => {
-    console.log("Add Rating!", bodyObj)
-
-    // bodyObj = {
-    //   ...bodyObj,
-    //   user_id: this.props.currentUser
-    // }
+  addRating = bodyObj => {
+    console.log("Add Rating after update!", bodyObj);
 
     const configObj = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accepts": "application/json"
+        Accepts: "application/json"
       },
       body: JSON.stringify(bodyObj)
-    }
+    };
 
     fetch(`http://localhost:3000/ratings`, configObj)
-    .then(resp => resp.json())
-    .then(rating => {
-      console.log("rating", rating)
+      .then(resp => resp.json())
+      .then(newRating => {
+        console.log("rating", newRating);
+        if (this.state.ratings) {
+          this.setState({
+            ratings: [...this.state.ratings, newRating]
+          })
+        } else {
+          this.setState({
+            ratings: [newRating]
+          });
+        }
+      });
+  };
+
+  editRating = bodyObj => {
+
+    const configObj = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accepts: "application/json"
+      },
+      body: JSON.stringify(bodyObj)
+    };
+
+    fetch(`http://localhost:3000/ratings/${bodyObj.id}`, configObj)
+      .then(resp => resp.json())
+      .then(editedRating => {
+        console.log("rating", editedRating);
+        let newRatings = this.state.ratings.map(rating => {
+          if (rating.id === editedRating.id) {
+            return editedRating
+          } else {
+            return rating
+          }
+        })
+        this.setState({
+          ratings: newRatings
+        })
+      });
+  };
+
+  deleteRating = id => {
+    console.log("delete rating", id)
+
+    const configObj = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accepts: "application/json"
+      }
+    };
+
+    fetch(`http://localhost:3000/ratings/${id}`, configObj)
+    
+    let newRatings = this.state.ratings.filter(rating => rating.id !== id)
+    console.log("deleting rating from showCon state", id)
+    this.setState({
+      ratings: newRatings
     })
-  }
+  };
 
   editFormChangeHandler = e => {
     console.log(e);
@@ -72,13 +131,13 @@ class ShowContainer extends React.Component {
     fetch(
       `http://localhost:3000/authors/${parseInt(
         this.props.routerProps.match.params.id
-      )}`, configObj)
-     .then()
-     .then(() => {
-        window.location.reload()
-     })
-
-
+      )}`,
+      configObj
+    )
+      .then()
+      .then(() => {
+        window.location.reload();
+      });
   };
 
   renderArticles = () => {
@@ -94,6 +153,28 @@ class ShowContainer extends React.Component {
     return <div>{displayedArticles}</div>;
   };
 
+  // checkForMyRating = () => {
+  //   console.log("hitting")
+  //   const myRating = this.state.ratings.find(
+  //     rating => rating.user_id === this.props.currentUser.id
+  //   );
+
+  //   if (myRating) {
+  //     debugger
+  //     this.setState({
+  //       editMode: true,
+  //       integrity: myRating.integrity,
+  //       likeability: myRating.likeability
+  //     });
+  //   }
+  // };
+
+  ratingChangeHandler = target => {
+    this.setState({
+      [target.name]: target.value
+    });
+  };
+
   render() {
     return (
       <div>
@@ -102,7 +183,11 @@ class ShowContainer extends React.Component {
             {...this.state}
             editFormChangeHandler={this.editFormChangeHandler}
             updateAuthor={this.updateAuthor}
+            currentUser={this.props.currentUser}
             addRating={this.addRating}
+            editRating={this.editRating}
+            deleteRating={this.deleteRating}
+            ratingChangeHandler={this.ratingChangeHandler}
           />
         </div>
         <Divider hidden />

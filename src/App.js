@@ -50,6 +50,7 @@ class App extends React.Component {
           render={routerProps => (
             <LoggedInContainer
               routerProps={routerProps}
+              currentUser={this.state.currentUser}
               checkAutoLogin={this.checkAutoLogin}
             />
           )}

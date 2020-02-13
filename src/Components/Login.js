@@ -21,6 +21,41 @@ class Login extends React.Component {
     });
   };
 
+  submitHandler = () => {
+
+      // fetch
+      const configObj = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accepts: "application/json"
+        },
+        body: JSON.stringify({
+          username: this.state.username,
+          password: this.state.password
+        })
+      };
+
+      console.log(configObj)
+
+      //form should be reset to blank!!
+
+
+      fetch(`http://localhost:3000/login`, configObj)
+        .then(resp => resp.json())
+        .then(json => {
+          if (json.errors) {
+            console.log("errors")
+            alert(json.errors);
+          } else {
+            console.log("success")
+            this.props.setUser(json);
+            // reroute if successful
+          }
+        });
+    
+  };
+
   render() {
     return (
       <div>
@@ -48,7 +83,12 @@ class Login extends React.Component {
               onChange={this.changeHandler}
               type="password"
             />
-            <Button color="grey" fluid size="large">
+            <Button
+              onClick={this.submitHandler}
+              color="grey"
+              fluid
+              size="large"
+            >
               Login
             </Button>
           </Segment>
