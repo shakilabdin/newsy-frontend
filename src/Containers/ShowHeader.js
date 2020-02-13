@@ -50,6 +50,14 @@ class ShowHeader extends React.Component {
     }
   };
 
+  numRatings = () => {
+    if (this.props.ratings) {
+      return this.props.ratings.length
+    } else {
+      return 0
+    }
+  }
+
   render() {
     return (
       <Grid>
@@ -64,19 +72,32 @@ class ShowHeader extends React.Component {
               {this.props.article_count !== 1 && "s"} Written
             </p>
             <p style={{ margin: "0px" }}>
-              {this.props.total_ratings} Rating
-              {this.props.total_ratings !== 1 && "s"}
+              {this.numRatings()} Rating
+              {this.numRatings() !== 1 && "s"}
             </p>
             <a href={`https://twitter.com/${this.props.twitter}`}>
               <i className="twitter icon"></i>
               <span>@{this.props.twitter}</span>
             </a>
+            <br />
+            <br />
+            <p>
+              <AuthorEditForm {...this.props} />
+            </p>
           </Grid.Column>
-          <Grid.Column width={7}>
+          <Grid.Column width={6} textAlign="center">
             <RatingPlot ratings={this.props.ratings} />
           </Grid.Column>
-          <Grid.Column width={2}>
-            <AuthorEditForm {...this.props} />
+          <Grid.Column width={3} verticalAlign="top" textAlign="center">
+            {this.state.editMode && (
+              <div>
+                <h3>Your Rating</h3>
+                Integrity: {this.state.integrity}<br />
+                Likeability: {this.state.likeability}<br />
+                <br />
+                <br />
+              </div>
+            )}
             <AddRatingModal
               {...this.props}
               editMode={this.state.editMode}

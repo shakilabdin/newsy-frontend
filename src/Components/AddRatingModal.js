@@ -62,7 +62,7 @@ class AddRatingModal extends React.Component {
             }}
             basic
             color="grey"
-            floated="right"
+            // floated="right"
           >
             {this.props.editMode ? "Edit Rating" : "Add Rating"}
           </Button>
@@ -125,6 +125,7 @@ class AddRatingModal extends React.Component {
           >
             <Icon name="checkmark" /> Submit
           </Button>
+          <br />
           <br />
           <Button onClick={this.deleteHandler} basic color="red">
             <Icon name="delete" /> Delete

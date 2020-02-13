@@ -53,7 +53,7 @@ class AuthorEditForm extends React.Component {
             }}
             basic
             color="grey"
-            floated="right"
+            // floated="right"
           >
             Edit Author
           </Button>
