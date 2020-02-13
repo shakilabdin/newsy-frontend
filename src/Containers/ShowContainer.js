@@ -169,11 +169,11 @@ class ShowContainer extends React.Component {
   //   }
   // };
 
-  ratingChangeHandler = target => {
-    this.setState({
-      [target.name]: target.value
-    });
-  };
+  // ratingChangeHandler = target => {
+  //   this.setState({
+  //     [target.name]: target.value
+  //   });
+  // };
 
   render() {
     return (
