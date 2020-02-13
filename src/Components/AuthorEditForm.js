@@ -1,26 +1,34 @@
 import React from 'react'
+import { Modal, Button, Icon, Header, Form} from 'semantic-ui-react'
 
 class AuthorEditForm extends React.Component {
   
-  state = {...this.props}
-
-  changeHandler = (e) => {
-    this.setState({
-    [e.target.name]: e.target.value    
-    })
+  state = {
+    showModal: false
   }
 
+  // changeHandler = (e) => {
+  //   console.log(e)
+  //   this.setState({
+  //   [e.target.name]: e.target.value    
+  //   })
+  // }
+
+
   submitHandler = (e) => {
-    e.preventDefault()
-    this.props.toggleEditing()
+    // e.preventDefault()
+    // this.props.toggleEditing()
+    this.setState({
+      showModal: false
+    })
 
     // PATCH request (coming soon!)
     const bodyObj = {
-      id: this.state.id,
-      name: this.state.name,
-      image: this.state.image,
-      twitter: this.state.twitter,
-      articles: this.state.articles
+      id: this.props.id,
+      name: this.props.name,
+      image: this.props.image,
+      twitter: this.props.twitter,
+      articles: this.props.articles
     }
     
     // handling for leading @ on twitter handle. Turns out Twitter can handle it with or without @
@@ -33,17 +41,72 @@ class AuthorEditForm extends React.Component {
 
   }
 
-  
   render() {
-    return(
-      <form>
-        {/* <input onChange={(e) => this.changeHandler(e)} name="name" value={this.state.name} type="text" /> */}
-        <input onChange={(e) => this.changeHandler(e)} name="image" value={this.state.image} type="text" />
-        <input onChange={(e) => this.changeHandler(e)} name="twitter" value={this.state.twitter} type="text" />
-        <input onClick={(e) => this.submitHandler(e)} name="submit" type="submit" />
-      </form>
 
-    )
+    return (
+      <Modal
+        open={this.state.showModal}
+        trigger={
+          <Button
+            onClick={() => {
+              this.setState({ showModal: true });
+            }}
+            basic
+            color="grey"
+            // floated="right"
+          >
+            Edit Author
+          </Button>
+        }
+        basic
+        size="small"
+      >
+        <Header icon="edit" content="Update Author Details" />
+        <Modal.Content>
+          <Form>
+            <Form.Field>
+              <lable>Image URL</lable>
+              <input
+                onChange={e => this.props.editFormChangeHandler(e)}
+                name="image"
+                value={this.props.image}
+                type="text"
+              />
+            </Form.Field>
+            <Form.Field>
+              <lable>Twitter Handle</lable>
+              <input
+                onChange={e => this.props.editFormChangeHandler(e)}
+                name="twitter"
+                value={this.props.twitter}
+                type="text"
+              />
+            </Form.Field>
+          </Form>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button
+            onClick={() => {
+              this.setState({showModal: false});
+            }}
+            basic
+            color="red"
+            inverted
+          >
+            <Icon name="user cancel" /> Cancel
+          </Button>
+          <Button
+            onClick={e => {
+              this.submitHandler(e);
+            }}
+            color="teal"
+            inverted
+          >
+            <Icon name="checkmark" /> Submit
+          </Button>
+        </Modal.Actions>
+      </Modal>
+    );
   }
 }
 

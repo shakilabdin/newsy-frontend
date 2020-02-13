@@ -7,13 +7,14 @@
   font-size: 4em;
 }
 
-img.headshot {
-  width: 150px;
-  height: 150px;
+.headshot {
+  width: 290px;
+  height: 250px;
+  object-fit: cover;
 }
 
 .nav-bar-logo {
-  width: 100px
+  width: 60px
 }
 
 .nav-bar-title {
@@ -25,4 +26,17 @@ img.headshot {
 
 .nav-bar {
   vertical-align: top;
+}
+
+.filter {
+  margin: auto;
+  text-align: center;
+}
+
+.timeline-Header {
+  display: none;
+}
+
+.slider {
+  width: 100%
 }

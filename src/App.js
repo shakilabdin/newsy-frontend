@@ -1,29 +1,79 @@
 import React from 'react';
 import './App.css';
-import {Route, Switch, Link} from 'react-router-dom'
-import AuthorContainer from './Containers/AuthorContainer'
-import ShowContainer from './Containers/ShowContainer'
-import NavBar from './Components/NavBar'
-import Welcome from './Components/Welcome'
+import {Route } from 'react-router-dom'
+import HomeContainer from './Containers/HomeContainer';
+import LoggedInContainer from "./Containers/LoggedInContainer";
+
 
 class App extends React.Component {
+  state = {
+    currentUser: null
+  };
+
+  setUser = response => {
+    this.setState(
+      {
+        currentUser: response.user
+      },
+      () => {
+        localStorage.token = response.token;
+        this.props.history.push("/authors");
+      }
+    );
+  };
+
+  checkAutoLogin = token => {
+    fetch("http://localhost:3000/auto_login", {
+      headers: {
+        Authorization: token
+      }
+    })
+      .then(res => res.json())
+      .then(response => {
+        if (response.errors) {
+          alert(response.errors);
+        } else {
+          this.setState({
+            currentUser: response
+          });
+        }
+      });
+  };
+
+  logout = () => {
+    this.setState(
+      {
+        currentUser: null
+      },
+      () => {
+        localStorage.removeItem("token");
+        this.props.history.push("/");
+      }
+    );
+  };
 
   render() {
-    // console.log(this.state.authors)
+    console.log("App Render");
     return (
       <div>
-        <NavBar />
-        <Switch> 
-          <Route path="/authors/:id" render={(routerProps) => <ShowContainer routerProps={routerProps} updateAuthor={this.updateAuthor} />} />
-          <Route path="/authors" render={() => <AuthorContainer />} />
-          <Route path="/login" render={() => <AuthorContainer />} />
-          <Route path="/signup" render={() => <AuthorContainer />} />
-          <Route path="/" component={Welcome} />
-          
-        </Switch>
+        <Route
+          path="/authors"
+          render={routerProps => (
+            <LoggedInContainer
+              routerProps={routerProps}
+              currentUser={this.state.currentUser}
+              checkAutoLogin={this.checkAutoLogin}
+              logout={this.logout}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/"
+          render={() => <HomeContainer setUser={this.setUser} />}
+        />
       </div>
     );
   }
 }
-
-export default App;
+ export default App
