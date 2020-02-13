@@ -11,7 +11,6 @@ class App extends React.Component {
   };
 
   setUser = response => {
-    debugger;
     this.setState(
       {
         currentUser: response.user
@@ -41,6 +40,18 @@ class App extends React.Component {
       });
   };
 
+  logout = () => {
+    this.setState(
+      {
+        currentUser: null
+      },
+      () => {
+        localStorage.removeItem("token");
+        this.props.history.push("/");
+      }
+    );
+  };
+
   render() {
     console.log("App Render");
     return (
@@ -52,6 +63,7 @@ class App extends React.Component {
               routerProps={routerProps}
               currentUser={this.state.currentUser}
               checkAutoLogin={this.checkAutoLogin}
+              logout={this.logout}
             />
           )}
         />

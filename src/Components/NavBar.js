@@ -21,6 +21,8 @@ class NavBar extends React.Component {
     }
   }
 
+
+
   render() {
     let authorArr = this.props.authors.map(author => ({
       key: author.id,
@@ -31,23 +33,18 @@ class NavBar extends React.Component {
     let authorOptions = ["", ...authorArr]
 
 
+    console.log("this.props.currentUser", this.props.currentUser)
     return (
 
       <Menu inverted color="grey" size="massive">
-        <Link to="/">
+        <Link to="/authors">
           <img className="nav-bar-logo" src="/newsy_logo.png" alt="logo"/>
         </Link>
         <div className="left menu">
           <Menu.Item
             onClick={this.handleItemClick}
           >
-            <Link to="/"><span>Newsy</span></Link>
-          </Menu.Item>
-          <Menu.Item
-            name="Authors"
-            onClick={this.handleItemClick}
-          >
-            <Link to="/authors"><span>Authors</span></Link>
+            <Link to="/authors"><span>Newsy</span></Link>
           </Menu.Item>
         </div>
         <div className="right menu">
@@ -66,13 +63,8 @@ class NavBar extends React.Component {
 
 
           <Menu.Item
-            name="Login"
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="Sign Up"
-            onClick={this.handleItemClick}
-          />
+            onClick={this.props.logout}
+          >{this.props.currentUser ? `Logout, ${this.props.currentUser.username}` : "Logout"}</Menu.Item>
         </div>
       </Menu>
     );

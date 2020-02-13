@@ -15,9 +15,9 @@ class LoggedInContainer extends React.Component {
   // On mount fetch all authors
   componentDidMount() {
 
-     const token = localStorage.token;
+    this.fetchAuthors()
+    const token = localStorage.token;
 
-     this.fetchAuthors()
      if (token) {
        //get user info
         this.props.checkAutoLogin(token)
@@ -25,8 +25,6 @@ class LoggedInContainer extends React.Component {
        this.props.routerProps.history.push('/')
      }
   }
-
-  
 
   fetchAuthors = () => {
     fetch(API)
@@ -38,28 +36,18 @@ class LoggedInContainer extends React.Component {
       );
   }
 
-
-  
-
-  // logout = () => {
-  //   this.setState(
-  //     {
-  //       currentUser: null
-  //     },
-  //     () => {
-  //       localStorage.removeItem("token");
-  //       this.props.routerProps.history.push("/login");
-  //     }
-  //   );
-  // };
-
   render() {
     return (
       <div>
         <Route
           path="/authors"
           render={routerProps => (
-            <NavBar routerProps={routerProps} authors={this.state.authors} />
+            <NavBar
+              routerProps={routerProps}
+              authors={this.state.authors}
+              logout={this.props.logout}
+              currentUser={this.props.currentUser}
+            />
           )}
         />
         <Switch>
